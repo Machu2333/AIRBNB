@@ -5,7 +5,8 @@ import React, { useMemo, useState } from 'react';
 // import ListingsMap from '@/components/ListingsMap';
 // import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
 import { Stack } from 'expo-router';
-// import ExploreHeader from '@/components/ExploreHeader';
+import ExploreHeader from '@/components/ExploreHeader';
+import Listings from '@/components/Listings';
 
 const Page = () => {
   // const items = useMemo(() => listingsData as any, []);
@@ -21,10 +22,10 @@ const Page = () => {
       {/* Define pour custom header */}
       <Stack.Screen
         options={{
-          // header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
+          header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
         }}
       />
-      {/* <ListingsMap listings={getoItems} /> */}
+      <Listings />
       {/* <ListingsBottomSheet listings={items} category={category} /> */}
     </View>
   );
