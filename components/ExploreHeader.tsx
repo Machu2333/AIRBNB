@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import { useRef, useState } from 'react';
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
@@ -57,16 +57,16 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <View style={{ backgroundColor: '#FFF', height: 150, paddingTop: 40 }}>
       <View style={styles.container}>
-        <View style={styles.actionRow}>
+        <View style={[styles.actionRow,]}>
           <Link href={'/(modals)/booking'} asChild>
             <TouchableOpacity>
               <View style={styles.searchBtn}>
                 <Ionicons name="search" size={24} />
                 <View>
                   <Text style={{}}>Where to?</Text>
-                  <Text style={{ color: Colors.grey, fontFamily: 'mon' }}>Anywhere · Any week</Text>
+                  <Text style={{ color: Colors.grey }}>Anywhere · Any week</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -77,7 +77,8 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
         </View>
 
         <ScrollView
-          horizontal
+          // style={{ backgroundColor: "pink", flex: 1 }}
+          horizontal={true}
           ref={scrollRef}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
@@ -90,7 +91,8 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
               ref={(el) => (itemsRef.current[index] = el)}
               key={index}
               style={activeIndex === index ? styles.categoriesBtnActive : styles.categoriesBtn}
-              onPress={() => selectCategory(index)}>
+              onPress={() => selectCategory(index)}
+            >
               <MaterialIcons
                 name={item.icon as any}
                 size={24}
@@ -100,10 +102,15 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
                 {item.name}
               </Text>
             </TouchableOpacity>
+
           ))}
         </ScrollView>
+
+
       </View>
-    </SafeAreaView>
+
+    </View>
+
   );
 };
 
