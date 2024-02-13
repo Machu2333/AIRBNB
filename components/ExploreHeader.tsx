@@ -48,8 +48,9 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
 
   const selectCategory = (index: number) => {
     const selected = itemsRef.current[index];
+
     setActiveIndex(index);
-    selected?.measure((x) => {
+    selected?.measureInWindow((x, y) => {
       scrollRef.current?.scrollTo({ x: x - 16, y: 0, animated: true });
     });
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -57,7 +58,11 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
   };
 
   return (
-    <View style={{ backgroundColor: '#FFF', height: 150, paddingTop: 40 }}>
+    <View style={{
+      backgroundColor: '#FFF',
+      // height: 90,
+      paddingTop: 40
+    }}>
       <View style={styles.container}>
         <View style={[styles.actionRow,]}>
           <Link href={'/(modals)/booking'} asChild>
@@ -77,7 +82,6 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
         </View>
 
         <ScrollView
-          // style={{ backgroundColor: "pink", flex: 1 }}
           horizontal={true}
           ref={scrollRef}
           showsHorizontalScrollIndicator={false}
@@ -117,7 +121,7 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    height: 130,
+    // height: 130,
     elevation: 2,
     shadowColor: '#000',
     shadowOpacity: 0.1,

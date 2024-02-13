@@ -12,7 +12,6 @@ import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 // Import your publishable key
 const CLERK_PUBLISHABLE_KEY = "pk_test_bWFqb3Itd2hhbGUtMzIuY2xlcmsuYWNjb3VudHMuZGV2JA"
 if (!CLERK_PUBLISHABLE_KEY) {
-  console.log("Missing Publishable Key")
 }
 const tokenCache = {
   async getToken(key: string) {
