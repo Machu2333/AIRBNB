@@ -48,6 +48,11 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     GreatVibes: require('../assets/fonts/GreatVibes-Regular.ttf'),
     Lobster: require('../assets/fonts/Lobster/Lobster-Regular.ttf'),
+    "mon": require('../assets/fonts/Lobster/Lobster-Regular.ttf'),
+    "mon-sb": require('../assets/fonts/Lobster/Lobster-Regular.ttf'),
+    "mon-b": require('../assets/fonts/Lobster/Lobster-Regular.ttf'),
+
+
 
     // ...FontAwesome.font,
   });
