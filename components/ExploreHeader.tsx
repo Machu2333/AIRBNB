@@ -1,10 +1,12 @@
-import { View, Text, SafeAreaView, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import { useRef, useState } from 'react';
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Link } from 'expo-router';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const categories = [
   {
@@ -58,11 +60,11 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
   };
 
   return (
-    <View style={{
-      backgroundColor: '#FFF',
-      // height: 90,
-      paddingTop: 40
-    }}>
+    <SafeAreaView style={{}} edges={[
+      'top'
+    ]}>
+
+
       <View style={styles.container}>
         <View style={[styles.actionRow,]}>
           <Link href={'/(modals)/booking'} asChild>
@@ -113,8 +115,7 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
 
       </View>
 
-    </View>
-
+    </SafeAreaView>
   );
 };
 

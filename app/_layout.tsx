@@ -5,9 +5,10 @@ import { useFonts } from 'expo-font';
 import { Stack, router, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Import your publishable key
 const CLERK_PUBLISHABLE_KEY = "pk_test_bWFqb3Itd2hhbGUtMzIuY2xlcmsuYWNjb3VudHMuZGV2JA"
@@ -74,7 +75,8 @@ export default function RootLayout() {
 
 
   return <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
-    <RootLayoutNav />
+      <RootLayoutNav />
+
 
   </ClerkProvider>
 
@@ -105,7 +107,7 @@ function RootLayoutNav() {
             fontFamily: "Lobster",
           },
           headerTitleAlign: "center",
-          presentation: "modal",
+          presentation: "card",
           // headerBackTitleVisible: true,
           headerLeft: () => (
             <TouchableOpacity onPress={() => {
@@ -118,8 +120,13 @@ function RootLayoutNav() {
       <Stack.Screen
         name="listing/[id]"
         options={{
-          headerTitle: ""
-        }} />
+          // header: () =>
+          //   <View style={{ backgroundColor: '#fff' }}>
+          //     <Text>123132</Text>
+          //   </View>,
+          headerTitle: "qweqwe"
+        }}
+      />
       <Stack.Screen
         name="(modals)/booking"
 
