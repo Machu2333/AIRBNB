@@ -55,6 +55,7 @@ export default function RootLayout() {
 
 
 
+
     // ...FontAwesome.font,
   });
 
@@ -66,16 +67,17 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+
+
     }
   }, [loaded]);
-
   if (!loaded) {
     return null;
   }
 
 
   return <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
-      <RootLayoutNav />
+    <RootLayoutNav />
 
 
   </ClerkProvider>
