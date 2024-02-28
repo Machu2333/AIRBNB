@@ -9,6 +9,7 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // Import your publishable key
 const CLERK_PUBLISHABLE_KEY = "pk_test_bWFqb3Itd2hhbGUtMzIuY2xlcmsuYWNjb3VudHMuZGV2JA"
@@ -49,9 +50,9 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     GreatVibes: require('../assets/fonts/GreatVibes-Regular.ttf'),
     Lobster: require('../assets/fonts/Lobster/Lobster-Regular.ttf'),
-    "mon": require('../assets/fonts/Lobster/Lobster-Regular.ttf'),
-    "mon-sb": require('../assets/fonts/Lobster/Lobster-Regular.ttf'),
-    "mon-b": require('../assets/fonts/Lobster/Lobster-Regular.ttf'),
+    "mon": require('../assets/fonts/Montserrat-Regular.ttf'),
+    "mon-sb": require('../assets/fonts/Montserrat-SemiBold.ttf'),
+    "mon-b": require('../assets/fonts/Montserrat-Bold.ttf'),
 
 
 
@@ -78,8 +79,6 @@ export default function RootLayout() {
 
   return <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
     <RootLayoutNav />
-
-
   </ClerkProvider>
 
 
@@ -122,11 +121,6 @@ function RootLayoutNav() {
       <Stack.Screen
         name="listing/[id]"
         options={{
-          // header: () =>
-          //   <View style={{ backgroundColor: '#fff' }}>
-          //     <Text>123132</Text>
-          //   </View>,
-          headerTitle: "qweqwe"
         }}
       />
       <Stack.Screen

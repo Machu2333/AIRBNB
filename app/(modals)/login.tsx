@@ -1,30 +1,27 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { useWarmUpBrowser } from '@/hooks/useWarmUpBrowser'
-import { defaultStyles } from '@/constants/Styles';
 import Colors from '@/constants/Colors';
-import { Ionicons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { useOAuth, useSignUp } from '@clerk/clerk-expo';
+import { useOAuth } from '@clerk/clerk-expo';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { View, StyleSheet, TextInput, Text, TouchableOpacity } from 'react-native';
+
+// https://github.com/clerkinc/clerk-expo-starter/blob/main/components/OAuth.tsx
+import { useWarmUpBrowser } from '@/hooks/useWarmUpBrowser';
+import { defaultStyles } from '@/constants/Styles';
 
 enum Strategy {
   Google = 'oauth_google',
   Apple = 'oauth_apple',
   Facebook = 'oauth_facebook',
 }
-
 const Page = () => {
   useWarmUpBrowser();
 
   const router = useRouter();
-  //根据前方传入的对象，决定采用那种认证策略
   const { startOAuthFlow: googleAuth } = useOAuth({ strategy: 'oauth_google' });
   const { startOAuthFlow: appleAuth } = useOAuth({ strategy: 'oauth_apple' });
   const { startOAuthFlow: facebookAuth } = useOAuth({ strategy: 'oauth_facebook' });
 
   const onSelectAuth = async (strategy: Strategy) => {
-
     const selectedAuth = {
       [Strategy.Google]: googleAuth,
       [Strategy.Apple]: appleAuth,
@@ -43,18 +40,18 @@ const Page = () => {
     }
   };
 
-
   return (
     <View style={styles.container}>
-      <TextInput autoCapitalize='none'
-        placeholder='Email'
+      <TextInput
+        autoCapitalize="none"
+        placeholder="Email"
         style={[defaultStyles.inputField, { marginBottom: 30 }]}
-        onChangeText={(e) => {
-        }}
       />
-      <TouchableOpacity style={[defaultStyles.btn]}>
+
+      <TouchableOpacity style={defaultStyles.btn}>
         <Text style={defaultStyles.btnText}>Continue</Text>
       </TouchableOpacity>
+
       <View style={styles.seperatorView}>
         <View
           style={{
@@ -72,6 +69,7 @@ const Page = () => {
           }}
         />
       </View>
+
       <View style={{ gap: 20 }}>
         <TouchableOpacity style={styles.btnOutline}>
           <Ionicons name="mail-outline" size={24} style={defaultStyles.btnIcon} />
@@ -83,19 +81,21 @@ const Page = () => {
           <Text style={styles.btnOutlineText}>Continue with Apple</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnOutline} onPress={() => { }}>
+        <TouchableOpacity style={styles.btnOutline} onPress={() => onSelectAuth(Strategy.Google)}>
           <AntDesign name="google" size={24} color="black" style={defaultStyles.btnIcon} />
           <Text style={styles.btnOutlineText}>Continue with Google</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnOutline} onPress={() => { }}>
+        <TouchableOpacity style={styles.btnOutline} onPress={() => onSelectAuth(Strategy.Facebook)}>
           <AntDesign name="facebook-square" size={24} color="black" style={defaultStyles.btnIcon} />
           <Text style={styles.btnOutlineText}>Continue with Facebook</Text>
         </TouchableOpacity>
       </View>
     </View>
-  )
-}
+  );
+};
+
+export default Page;
 
 const styles = StyleSheet.create({
   container: {
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
   seperator: {
-    // fontFamily: 'mon-sb',
+    fontFamily: 'mon-sb',
     color: Colors.grey,
     fontSize: 16,
   },
@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
   btnOutlineText: {
     color: '#000',
     fontSize: 16,
-    // fontFamily: 'mon-sb',
+    fontFamily: 'mon-sb',
   },
 });
-export default Page

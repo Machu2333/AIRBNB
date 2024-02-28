@@ -5,6 +5,7 @@ import { Link } from 'expo-router';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 import { useEffect, useRef, useState } from 'react';
 import { Listing } from '@/interface/listing';
+import { BottomSheetFlatList, BottomSheetFlatListMethods } from '@gorhom/bottom-sheet';
 // import { BottomSheetFlatList, BottomSheetFlatListMethods } from '@gorhom/bottom-sheet';
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const Listings = ({ listings: items, category }: Props) => {
-  const listRef = useRef<FlatList>(null);
+  const listRef = useRef<BottomSheetFlatListMethods>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const renderRow: ListRenderItem<Listing> = ({ item }) => {
     return <Link href={`/listing/${item.id}`} asChild>
@@ -61,10 +62,11 @@ const Listings = ({ listings: items, category }: Props) => {
 
   return (
     <View style={[defaultStyles.container]}>
-      <FlatList
+      <BottomSheetFlatList
         data={loading ? [] : items}
         renderItem={renderRow}
         ref={listRef}
+        ListHeaderComponent={<Text style={styles.info}>{items.length} homes</Text>}
       />
     </View>
   );
