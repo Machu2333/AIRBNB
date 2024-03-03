@@ -12,7 +12,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // Import your publishable key
-const CLERK_PUBLISHABLE_KEY = "pk_test_bWFqb3Itd2hhbGUtMzIuY2xlcmsuYWNjb3VudHMuZGV2JA"
+const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
 if (!CLERK_PUBLISHABLE_KEY) {
 }
 const tokenCache = {
@@ -68,8 +69,6 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
-
-
     }
   }, [loaded]);
   if (!loaded) {
@@ -77,7 +76,7 @@ export default function RootLayout() {
   }
 
 
-  return <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+  return <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
     <RootLayoutNav />
   </ClerkProvider>
 
