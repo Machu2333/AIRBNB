@@ -4,13 +4,14 @@ import { DarkTheme, DefaultTheme, ThemeProvider, useRoute } from '@react-navigat
 import { useFonts } from 'expo-font';
 import { Stack, router, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
+import ModalHeaderText from '@/components/ModalHeaderText';
+import Colors from '@/constants/Colors';
 // Import your publishable key
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -122,13 +123,28 @@ function RootLayoutNav() {
         options={{
         }}
       />
-      <Stack.Screen
+     <Stack.Screen
         name="(modals)/booking"
-
         options={{
-          presentation: "transparentModal",
-          animation: "fade",
-        }} />
+          presentation: 'transparentModal',
+          animation: 'fade',
+          headerTransparent: true,
+          headerTitle: (props) => <ModalHeaderText />,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={{
+                backgroundColor: '#fff',
+                borderColor: Colors.grey,
+                borderRadius: 20,
+                borderWidth: 1,
+                padding: 4,
+              }}>
+              <Ionicons name="close-outline" size={22} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
 
     </Stack>
   );
