@@ -2,12 +2,13 @@ import Colors from '@/constants/Colors';
 import { useOAuth } from '@clerk/clerk-expo';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { View, StyleSheet, TextInput, Text, TouchableOpacity } from 'react-native';
-
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // https://github.com/clerkinc/clerk-expo-starter/blob/main/components/OAuth.tsx
 import { useWarmUpBrowser } from '@/hooks/useWarmUpBrowser';
 import { defaultStyles } from '@/constants/Styles';
-
+import { login_phoneNumber } from "../../api/interface"
+import { useState } from 'react';
 enum Strategy {
   Google = 'oauth_google',
   Apple = 'oauth_apple',
@@ -41,16 +42,33 @@ const Page = () => {
       console.error('OAuth error', err);
     }
   };
+  let [phoneNumber, setNumber] = useState("");
+  let [password, setPassword] = useState("");
 
   return (
     <View style={styles.container}>
       <TextInput
         autoCapitalize="none"
-        placeholder="Email"
+        placeholder="Phone Number"
+        style={[defaultStyles.inputField, { marginBottom: 15 }]}
+        onChangeText={(text) => setNumber(text)}
+      />
+      <TextInput
+        autoCapitalize="none"
+        placeholder="Passaword"
         style={[defaultStyles.inputField, { marginBottom: 30 }]}
+        onChangeText={(text) => setPassword(text)}
       />
 
-      <TouchableOpacity style={defaultStyles.btn}>
+      <TouchableOpacity style={defaultStyles.btn} onPress={async () => {
+        let res = await login_phoneNumber({
+          phoneNumber,
+          password
+        })
+        AsyncStorage.setItem("defToken", res.token)
+        console.log(res.token, "ressss.token");
+
+      }}>
         <Text style={defaultStyles.btnText}>Continue</Text>
       </TouchableOpacity>
 
